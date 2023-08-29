@@ -1,0 +1,26 @@
+.statusName
+  @apply uppercase tracking-widest relative left-[20px] text-secondText font-medium
+  &::before
+    content: ''
+    width: 10px
+    height: 10px
+    border-radius: 100%
+    background-color: #fff
+    position: absolute
+    top: 50%
+    left: -20px
+    transform: translateY(-50%)
+    background-color: #fffda0
+
+.statusName.todo
+  &::before
+    background-color: #45C7E5
+.statusName.doing
+  &::before
+    background-color: #826DF4
+.statusName
+  &::before.done
+    background-color: #68E7B2
+
+.empty
+  @apply mt-8 pl-8 rounded-xl font-medium text-secondText

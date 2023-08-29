@@ -1,0 +1,22 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Kanit:wght@500;600&family=Oswald:wght@300;400&display=swap')
+
+@import './_reset'
+
+:root 
+  --toastify-color-progress-dark: #645FC6
+
+
+html, body
+  font-size: 10px
+  height: 100%
+
+body
+  @apply relative overflow-hidden min-w-[320px] font-barlow text-[1.6rem] bg-darker
+
+::selection
+  @apply bg-dark text-accent
+

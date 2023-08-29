@@ -1,0 +1,29 @@
+.modal
+  @apply fixed top-0 left-0 right-0 bottom-0 z-10
+  background-color: rgba(#000, .5)
+  display: none
+
+.modal.active
+  @apply flex items-center justify-center
+
+
+.modal_window
+  @apply bg-dark p-10 min-w-[350px] text-white font-medium rounded-md
+
+
+.topLine
+  @apply flex items-center justify-between 
+
+
+.modal_title
+  @apply text-[2rem]
+
+
+.close
+  @apply cursor-pointer transition-colors
+  &:hover
+    @apply text-accent 
+
+  
+.modal_content
+  @apply mt-[25px] flex flex-col gap-8

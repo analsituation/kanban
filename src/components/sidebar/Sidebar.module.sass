@@ -1,0 +1,50 @@
+.sidebar
+  @apply absolute  left-0 text-secondText bg-dark w-[20%] h-[100%] 
+  border-right: 1px solid rgba(#fff , 0.15)
+
+.logo
+  @apply w-[100%] flex text-[4rem] font-medium items-center font-kanit  h-[85px] text-white
+
+// .logo_img
+
+.logo_text
+  @apply w-[100%] text-center mt-[-13px] 
+
+.sidebar_menu
+  @apply p-10
+
+.boards_count
+  @apply uppercase font-medium tracking-widest text-[1.4rem]
+
+.categories
+  @apply mt-6
+
+  a
+    @apply p-4 text-[1.9rem] font-medium relative block
+
+  .active
+    @apply  text-white rounded-full z-10
+    &::before
+      @apply bg-accent rounded-full
+      content: ''
+      position: absolute
+      top: 0
+      left: -20%
+      bottom: 0
+      height: 100%
+      width: 120%
+      z-index: -1
+
+.create_board
+  @apply text-accent mt-6 text-[1.9rem] font-medium cursor-pointer transition-colors
+  &:hover
+    color: lighten(#645FC6, 10)
+
+
+
+
+
+
+
+
+

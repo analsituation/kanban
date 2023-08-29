@@ -1,0 +1,27 @@
+{
+  "trailingComma": "none",
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 100,
+  "arrowParens": "avoid",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@components/(.*)$",
+    "^@screens/(.*)$",
+    "^@ui/(.*)$",
+    "^@hooks/(.*)$",
+    "^@shared/(.*)$",
+    "^@services/(.*)$",
+    "^@utils/(.*)$",
+    "^@config/(.*)$",
+    "^@store/(.*)$",
+    "^../(.*)",
+    "^./(.*)",
+    "(.sass)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}
