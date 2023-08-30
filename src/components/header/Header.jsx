@@ -16,8 +16,8 @@ const Header = () => {
     title: '',
     description: '',
     subTasks: [
-      { id: 0, title: '' },
-      { id: 1, title: '' }
+      { id: 0, title: '', completed: false },
+      { id: 1, title: '', completed: false }
     ]
   }
 
@@ -35,7 +35,7 @@ const Header = () => {
     const id = Date.now()
     setTaskData({
       ...taskData,
-      subTasks: [...taskData.subTasks, { id, title: '' }]
+      subTasks: [...taskData.subTasks, { id, title: '', completed: false }]
     })
   }
 

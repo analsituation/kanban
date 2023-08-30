@@ -12,7 +12,10 @@ const initialState = {
               id: 1,
               title: 'View carts for tasks',
               description: 'Make the ability to open task carts in modal window or new page.',
-              subTasks: []
+              subTasks: [
+                { id: 0, title: 'asd dddd aaaaaaaaaaaaaaa', completed: false },
+                { id: 1, title: 'Some text', completed: true }
+              ]
             },
             {
               id: 2,
@@ -104,12 +107,24 @@ export const todoSlice = createSlice({
               id: nanoid(),
               title: task.title,
               description: task.description,
-              subTasks: [...task.subTasks]
+              subTasks: task.subTasks.map(subtask => ({
+                id: nanoid(),
+                title: subtask.title,
+                completed: false
+              }))
             }
           }
         }
       }
     }
+    // createTask: {
+    //   reducer(state, action) {
+
+    //   },
+    //   prepare(id, status, subtasks) {
+    //     const
+    //   }
+    // }
   }
 })
 

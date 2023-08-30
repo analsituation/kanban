@@ -7,6 +7,47 @@
 .desc
   @apply text-[1.4rem] text-secondText
 
+.select
+  @apply  text-secondText font-thin mt-5
+  [class$="-control"]
+    @apply bg-dark rounded-md cursor-pointer
+    box-shadow: none
+    border: 1px solid rgba(#fff, 0.2) !important
+
+    &:hover
+      border: 1px solid rgba(#fff, 0.4) !important
+
+    &:focus
+      outline: none !important
+      border: 1px solid rgba(#fff, 0.4) !important
+
+    &:active
+      outline: none
+      border: 1px solid rgba(#fff, 0.4) !important
+ 
+
+  [class$="-option"]
+    @apply bg-dark cursor-pointer
+    &:hover
+      @apply bg-accent text-white
+
+  [class$="-menu"]
+    @apply bg-dark 
+
+  [class$="singleValue"]
+    color: #fff
+
+  [class$="indicatorContainer"]
+    svg
+      color: #645FC6
+    &:hover
+      svg
+        color: #645FC6 !important
+
+  [class$="indicatorSeparator"]
+    display: none
+
+
 
 
 
