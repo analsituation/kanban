@@ -96,9 +96,7 @@ const Header = () => {
         <Button light={true} clickHandler={addSubTask}>
           More subtask
         </Button>
-        <p className="text-secondText text-[1.2rem] mt-6">
-          *Every new tasks adds to "Todo" category
-        </p>
+        <p className={styles.createtask_info}>*Every new tasks adds to "Todo" category</p>
         <Button
           clickHandler={() => {
             dispatch(createTask(category, taskData))

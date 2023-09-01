@@ -1,29 +1,47 @@
 .modal
-  @apply fixed top-0 left-0 right-0 bottom-0 z-10
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 10
   background-color: rgba(#000, .5)
   display: none
 
 .modal.active
-  @apply flex items-center justify-center
+  display: flex
+  align-items: center
+  justify-content: center
 
 
 .modal_window
-  @apply bg-dark p-10 min-w-[350px] text-white font-medium rounded-md
+  background-color: $dark
+  padding: 2.5rem
+  min-width: 350px
+  color: $white
+  font-weight: 500
+  border-radius: 0.4rem
 
 
 .topLine
-  @apply flex items-center justify-between 
+  display: flex
+  align-items: center
+  justify-content: space-between
 
 
 .modal_title
-  @apply text-[2rem]
+  font-size: 2rem
 
 
 .close
-  @apply cursor-pointer transition-colors
+  cursor: pointer
+  transition: color 0.2s ease-in
   &:hover
-    @apply text-accent 
+    color: $accent
 
   
 .modal_content
-  @apply mt-[25px] flex flex-col gap-8
+  margin-top: 25px
+  display: flex
+  flex-direction: column
+  gap: 2rem

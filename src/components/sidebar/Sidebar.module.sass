@@ -1,31 +1,55 @@
 .sidebar
-  @apply absolute  left-0 text-secondText bg-dark w-[20%] h-[100%] 
+  position: absolute
+  left: 0
+  color: $secondText
+  background-color: $dark
+  width: 20%
+  height: 100%
   border-right: 1px solid rgba(#fff , 0.15)
 
 .logo
-  @apply w-[100%] flex text-[4rem] font-medium items-center font-kanit  h-[85px] text-white
+  width: 100%
+  display: flex
+  font-size: 4rem
+  font-weight: 500
+  align-items: center
+  font-family: $kanit
+  height: 85px
+  color: $white
 
 // .logo_img
 
 .logo_text
-  @apply w-[100%] text-center mt-[-13px] 
+  width: 100%
+  text-align: center
+  margin-top: -13px
 
 .sidebar_menu
-  @apply p-10
+  padding: 2.5rem
 
 .boards_count
-  @apply uppercase font-medium tracking-widest text-[1.4rem]
+  text-transform: uppercase
+  font-weight: 500
+  letter-spacing: 0.1em
+  font-size: 1.4rem
 
 .categories
-  @apply mt-6
+  margin-top: 1.5rem
 
   a
-    @apply p-4 text-[1.9rem] font-medium relative block
+    color: $secondText
+    display: block
+    position: relative
+    padding: 1rem
+    font-size: 1.9rem
+    font-weight: 500
 
   .active
-    @apply  text-white rounded-full z-10
+    color: $white
+    z-index: 10
     &::before
-      @apply bg-accent rounded-full
+      background-color: $accent
+      border-radius: 100px
       content: ''
       position: absolute
       top: 0
@@ -36,7 +60,12 @@
       z-index: -1
 
 .create_board
-  @apply text-accent mt-6 text-[1.9rem] font-medium cursor-pointer transition-colors
+  color: $accent
+  margin-top: 1.5rem
+  font-size: 1.9rem
+  font-weight: 500
+  cursor: pointer
+  transition: color 0.2s ease-in
   &:hover
     color: lighten(#645FC6, 10)
 

@@ -1,5 +1,10 @@
 .statusName
-  @apply uppercase tracking-widest relative left-[20px] text-secondText font-medium
+  text-transform: uppercase
+  letter-spacing: 0.1em
+  position: relative
+  left: 20%
+  color: $secondText
+  font-weight: 500
   &::before
     content: ''
     width: 10px
@@ -23,4 +28,7 @@
     background-color: #68E7B2
 
 .empty
-  @apply mt-8 pl-8 rounded-xl font-medium text-secondText
+  margin-top: 2rem
+  padding-left: 2rem
+  font-weight: 500
+  color: $secondText

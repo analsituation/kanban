@@ -1,9 +1,19 @@
 .button
-  @apply block bg-accent text-white text-[1.8rem] font-medium rounded-full px-8 py-2 w-[100%] z-10 
+  display: block
+  background-color: $accent
+  color: $white
+  font-size: 1.8rem
+  font-weight: 500
+  border-radius: 100px
+  padding: 0.5rem 2rem
+  width: 100%
+  z-index: 10
   transition: all .15s ease
   border: 1px solid transparent
   &.light
-    @apply block bg-white text-accent
+    display: block
+    background-color: $white
+    color: $accent
 
   &:hover
     border: 1px solid rgba(#21212D, 0.6)

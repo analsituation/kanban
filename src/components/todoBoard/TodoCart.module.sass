@@ -1,16 +1,28 @@
 .todoCart
-  @apply bg-dark mt-8 p-6 rounded-xl font-medium cursor-pointer
+  background-color: $dark
+  margin-top: 2rem
+  padding: 1.5rem
+  border-radius: 0.75rem
+  font-weight: 500
+  cursor: pointer
 
 .title
-  @apply text-[2rem] text-white
+  font-size: 2rem
+  color: $white
 
 .desc
-  @apply text-[1.4rem] text-secondText
+  margin-top: 20px
+  font-size: 1.4rem
+  color: $secondText
 
 .select
-  @apply  text-secondText font-thin mt-5
+  color: $secondText
+  font-weight: 300
+  margin-top: 1.25rem
   [class$="-control"]
-    @apply bg-dark rounded-md cursor-pointer
+    background-color: $dark
+    cursor: pointer
+    border-radius: 0.4rem
     box-shadow: none
     border: 1px solid rgba(#fff, 0.2) !important
 
@@ -27,12 +39,14 @@
  
 
   [class$="-option"]
-    @apply bg-dark cursor-pointer
+    background-color: $dark
+    cursor: pointer
     &:hover
-      @apply bg-accent text-white
+      background-color: $accent
+      color: $white
 
   [class$="-menu"]
-    @apply bg-dark 
+    background-color: $dark
 
   [class$="singleValue"]
     color: #fff
@@ -47,6 +61,13 @@
   [class$="indicatorSeparator"]
     display: none
 
+.subtasks_title
+  margin: 15px 0 10px
+
+.subtasks_block
+  display: flex
+  flex-direction: column
+  gap: 15px
 
 
 
