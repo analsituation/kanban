@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -9,9 +9,13 @@ import Modal from '../modal/Modal'
 import Input from '../input/Input'
 import { createTask } from '../../store/todoSlice'
 import Label from '../label/Label'
+import { selectCategories } from '../../store/selectors'
 
 const Header = () => {
   const { category } = useParams()
+  const categories = useSelector(selectCategories)
+  const existingCategory = !!categories.find(el => el.categoryName === category)
+
   const emptyData = {
     title: '',
     description: '',
@@ -43,9 +47,12 @@ const Header = () => {
     <>
       <header className={styles.header}>
         <div className={styles.main_line}>
-          <span className={styles.category_route}>{category ? category : 'Platform Launch'}</span>
+          <span className={styles.category_route}>
+            {existingCategory ? category : 'Platform Launch'}
+          </span>
           <span className={styles.add_button}>
             <Button
+              disabled={!existingCategory}
               clickHandler={() => {
                 category ? setModalShown(true) : toast('Chose category')
               }}
