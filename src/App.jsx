@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/category/:category" element={<Category />} />
+          <Route path="/category/:categoryName" element={<Category />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

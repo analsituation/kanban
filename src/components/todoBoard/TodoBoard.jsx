@@ -1,10 +1,13 @@
 import React from 'react'
-import styles from './TodoBoard.module.sass'
-import TodoCart from './TodoCart'
 import clsx from 'clsx'
 
-const TodoBoard = ({ status }) => {
-  const statusName = status.statusName.toLowerCase()
+import TodoCart from './TodoCart'
+
+import styles from './TodoBoard.module.sass'
+
+const TodoBoard = ({ status, todos }) => {
+  const statusName = status.toLowerCase()
+
   return (
     <div className={styles.column}>
       <h2
@@ -15,10 +18,10 @@ const TodoBoard = ({ status }) => {
           statusName === 'done' && styles.done
         )}
       >
-        {status.statusName} ({status.todos.length})
+        {status} ({todos.length})
       </h2>
-      {status.todos.length ? (
-        status.todos.map(todo => <TodoCart key={todo.id} todo={todo} />)
+      {todos.length ? (
+        todos.map(todo => <TodoCart key={todo.id} todo={todo} />)
       ) : (
         <div className={styles.empty}>Empty</div>
       )}

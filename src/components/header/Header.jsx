@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import styles from './Header.module.sass'
-import Button from '../button/Button'
+
 import Modal from '../modal/Modal'
 import Input from '../input/Input'
-import { createTask } from '../../store/todoSlice'
 import Label from '../label/Label'
+import Button from '../button/Button'
+import { createTask } from '../../store/todoSlice'
 import { selectCategories } from '../../store/selectors'
 
+import 'react-toastify/dist/ReactToastify.css'
+import styles from './Header.module.sass'
+
 const Header = () => {
-  const { category } = useParams()
+  const { categoryName } = useParams()
+  const location = useLocation()
   const categories = useSelector(selectCategories)
-  const existingCategory = !!categories.find(el => el.categoryName === category)
+  const existingCategory = !!categories.find(el => el.categoryName === categoryName)
 
   const emptyData = {
     title: '',
@@ -48,13 +51,13 @@ const Header = () => {
       <header className={styles.header}>
         <div className={styles.main_line}>
           <span className={styles.category_route}>
-            {existingCategory ? category : 'Platform Launch'}
+            {existingCategory ? categoryName : 'Platform Launch'}
           </span>
           <span className={styles.add_button}>
             <Button
-              disabled={!existingCategory}
+              disabled={!existingCategory && location.pathname !== '/'}
               clickHandler={() => {
-                category ? setModalShown(true) : toast('Chose category')
+                location.pathname !== '/' ? setModalShown(true) : toast('Chose category')
               }}
             >
               + Add task
@@ -106,7 +109,7 @@ const Header = () => {
         <p className={styles.createtask_info}>*Every new tasks adds to "Todo" category</p>
         <Button
           clickHandler={() => {
-            dispatch(createTask(category, taskData))
+            dispatch(createTask(categoryName, taskData))
             setTaskData(emptyData)
             setModalShown(false)
           }}

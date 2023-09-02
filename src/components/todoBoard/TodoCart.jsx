@@ -1,25 +1,58 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
-import styles from './TodoCart.module.sass'
+
 import Modal from '../modal/Modal'
+import Button from '../button/Button'
 import Checkbox from '../input/checkbox'
 import { selectStatusesOfCategory } from '../../store/selectors'
-import clsx from 'clsx'
+import { changeTask } from '../../store/todoSlice'
+import { isEqual } from './../../utils/isEqual'
+
+import styles from './TodoCart.module.sass'
 
 const TodoCart = ({ todo }) => {
   const [modalShown, setModalShown] = useState(false)
-  const { category } = useParams()
+  const [changeTaskData, setChangeTaskData] = useState(todo)
+  const { categoryName } = useParams()
 
-  const status = useSelector(state => selectStatusesOfCategory(state, category))
+  const statuses = useSelector(state => selectStatusesOfCategory(state, categoryName))
+  const dispatch = useDispatch()
 
   const options = [
-    ...status.statuses.map(status => ({
-      value: status.statusName.toLowerCase(),
-      label: status.statusName.toUpperCase()
+    ...statuses.map(status => ({
+      value: status,
+      label: status
     }))
   ]
+
+  const currentStatus = options.findIndex(option => option.value === todo.status)
+
+  const handleChangeCheckbox = currentId => {
+    const changedTodo = {
+      ...changeTaskData,
+      subTasks: changeTaskData.subTasks.map(st => {
+        if (st.id === currentId) {
+          return {
+            ...st,
+            completed: !st.completed
+          }
+        } else return st
+      })
+    }
+    setChangeTaskData(changedTodo)
+  }
+
+  const handleChangeStatus = e => {
+    const changedTodo = {
+      ...changeTaskData,
+      status: e.value
+    }
+    setChangeTaskData(changedTodo)
+  }
+
+  const completedSubTasks = todo.subTasks.filter(st => st.completed === true)
 
   return (
     <>
@@ -33,11 +66,17 @@ const TodoCart = ({ todo }) => {
           {todo.subTasks.length ? (
             <>
               <div className={styles.subtasks_title}>
-                Subtasks ({todo.subTasks.length} of {todo.subTasks.length})
+                Subtasks ({completedSubTasks.length} of {todo.subTasks.length})
               </div>
-              <div div className={styles.subtasks_block}>
-                {todo.subTasks.map(st => (
-                  <Checkbox title={st.title} status={st.completed} />
+              <div className={styles.subtasks_block}>
+                {changeTaskData.subTasks.map(st => (
+                  <Checkbox
+                    key={st.id}
+                    id={st.id}
+                    title={st.title}
+                    status={st.completed}
+                    onChange={handleChangeCheckbox}
+                  />
                 ))}
               </div>
             </>
@@ -49,14 +88,23 @@ const TodoCart = ({ todo }) => {
         <div className={styles.status}>
           Status
           <Select
+            onChange={e => handleChangeStatus(e)}
             options={options}
-            className={clsx(styles.select, {
-              control: state => (state.isFocused ? 'border-accent' : 'border-dark')
-            })}
+            defaultValue={options[currentStatus]}
+            className={styles.select}
             isClearable={false}
             isSearchable={false}
           />
         </div>
+        <Button
+          disabled={isEqual(todo, changeTaskData)}
+          clickHandler={() => {
+            dispatch(changeTask(categoryName, changeTaskData))
+            setModalShown(false)
+          }}
+        >
+          Save
+        </Button>
       </Modal>
     </>
   )

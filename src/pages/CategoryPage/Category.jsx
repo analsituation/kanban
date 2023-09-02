@@ -1,34 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, redirect } from 'react-router-dom'
+import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectStatusesOfCategory } from '../../store/selectors'
 
-import { createStatus } from '../../store/todoSlice'
 import TodoBoard from '../../components/todoBoard/TodoBoard'
+import NotFound from '../HomePage/NotFound'
 import Modal from '../../components/modal/Modal'
 import Input from './../../components/input/Input'
 import Button from './../../components/button/Button'
+import { createNewStatus } from '../../store/todoSlice'
+import { selectCurrentCategory } from '../../store/selectors'
 
 import styles from './Category.module.sass'
-import NotFound from '../HomePage/NotFound'
 
 const Category = () => {
   const [modalShown, setModalShown] = useState(false)
   const [status, setStatus] = useState('')
-
-  const { category } = useParams()
-  const columns = useSelector(state => selectStatusesOfCategory(state, category))
-
+  const { categoryName } = useParams()
   const dispatch = useDispatch()
 
-  if (!columns) {
+  const categoryInfo = useSelector(state => selectCurrentCategory(state, categoryName))
+  if (!categoryInfo) {
     return <NotFound />
+  }
+
+  const statuses = categoryInfo.statuses
+
+  const getTodosByStatus = status => {
+    return categoryInfo.todos.filter(todo => todo.status === status)
   }
 
   return (
     <div className={styles.categories}>
-      {columns.statuses &&
-        columns.statuses.map(col => <TodoBoard key={col.statusName} status={col} />)}
+      {categoryInfo.todos &&
+        statuses.map(board => (
+          <TodoBoard key={board} status={board} todos={getTodosByStatus(board)} />
+        ))}
       <div onClick={() => setModalShown(true)} className={styles.newColumn}>
         + New Column
       </div>
@@ -43,7 +49,7 @@ const Category = () => {
         />
         <Button
           clickHandler={() => {
-            dispatch(createStatus({ status, category: columns.categoryName }))
+            dispatch(createNewStatus({ category: categoryName, status }))
             setStatus('')
             setModalShown(false)
           }}

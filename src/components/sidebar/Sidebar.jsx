@@ -1,11 +1,21 @@
-import React from 'react'
+import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import styles from './Sidebar.module.sass'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
+import Modal from '../modal/Modal'
+import Input from '../input/Input'
+import Button from '../button/Button'
+import { createCategory } from '../../store/todoSlice'
 import { selectCategories } from './../../store/selectors'
 
-const Sidebar = ({ setModalShown }) => {
+import styles from './Sidebar.module.sass'
+
+const Sidebar = () => {
+  const [modalShown, setModalShown] = useState(false)
+  const [board, setBoard] = useState('')
   const categories = useSelector(selectCategories)
+
+  const dispatch = useDispatch()
 
   return (
     <aside className={styles.sidebar}>
@@ -34,6 +44,25 @@ const Sidebar = ({ setModalShown }) => {
           Create new board
         </div>
       </div>
+      <Modal title="Create new board" shown={modalShown} setModalShown={setModalShown}>
+        <Input
+          name={null}
+          value={board}
+          onChange={setBoard}
+          type="text"
+          placeholder="New board"
+          label="Board title"
+        />
+        <Button
+          clickHandler={() => {
+            dispatch(createCategory(board))
+            setBoard('')
+            setModalShown(false)
+          }}
+        >
+          Add new board
+        </Button>
+      </Modal>
     </aside>
   )
 }
