@@ -27,6 +27,8 @@
   display: flex
   align-items: center
   justify-content: space-between
+  position: relative
+  margin-bottom: 30px
 
 
 .modal_title
@@ -36,12 +38,67 @@
 .close
   cursor: pointer
   transition: color 0.2s ease-in
+
   &:hover
     color: $accent
 
+
+.edit_button
+  cursor: pointer
+  transition: color 0.2s ease-in
+  position: relative
+  width: 20px
+  height: 20px
+  
+  span, span::after, span::before
+    transition: background-color .2s ease
+    content: ''
+    width: 3px
+    height: 3px
+    position: absolute
+    background-color: $secondText
+
+  
+  span
+    top: 4px
+    left: 4px
+
+    &::after
+      top: 6px
+      left: 0
+
+    &::before
+      top: 12px
+      left: 0
+
+
+.tooltip
+  cursor: pointer
+  background-color: $darker
+  padding: 5px 15px
+  position: absolute
+  bottom: -30px
+  right: 0
+  display: none
+  word-wrap: normal
+  border-radius: 5px
+  transition: color .2s ease
+
+  &:hover
+    color: rgba(#ff6d6d, 0.65)
+
+
+.tooltip.tooltip_active
+  display: block
+
+
+.edit_button:hover span,
+.edit_button:hover span::after, 
+.edit_button:hover span::before
+  background-color: $accent
+
   
 .modal_content
-  margin-top: 25px
   display: flex
   flex-direction: column
   gap: 2rem

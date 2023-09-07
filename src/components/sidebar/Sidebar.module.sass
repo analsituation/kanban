@@ -7,6 +7,7 @@
   height: 100%
   border-right: 1px solid rgba(#fff , 0.15)
 
+
 .logo
   width: 100%
   display: flex
@@ -24,14 +25,17 @@
   text-align: center
   margin-top: -13px
 
+
 .sidebar_menu
   padding: 2.5rem
+
 
 .boards_count
   text-transform: uppercase
   font-weight: 500
   letter-spacing: 0.1em
   font-size: 1.4rem
+
 
 .categories
   margin-top: 1.5rem
@@ -43,10 +47,12 @@
     padding: 1rem
     font-size: 1.9rem
     font-weight: 500
+    
 
   .active
     color: $white
     z-index: 10
+
     &::before
       background-color: $accent
       border-radius: 100px
@@ -59,6 +65,7 @@
       width: 120%
       z-index: -1
 
+
 .create_board
   color: $accent
   margin-top: 1.5rem
@@ -66,14 +73,11 @@
   font-weight: 500
   cursor: pointer
   transition: color 0.2s ease-in
+
   &:hover
     color: lighten(#645FC6, 10)
 
 
-
-
-
-
-
-
-
+a.active span::selection
+  color: $darker
+  background-color: $accent

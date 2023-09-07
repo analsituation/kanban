@@ -9,6 +9,7 @@
   color: $secondText
   border-radius: 0.3rem
 
+
 .label
   display: block
   position: relative
@@ -20,12 +21,14 @@
   -ms-user-select: none
   user-select: none
 
+
 .label input 
   position: absolute
   opacity: 0
   cursor: pointer
   height: 0
   width: 0
+
 
 .checkmark 
   position: absolute
@@ -38,20 +41,25 @@
   border: 1px solid rgba(#fff, 0.15)
   background-color: #2C2C38
 
+
 .label:hover input ~ .checkmark 
   background-color: #2C2C38
 
+
 .label input:checked ~ .checkmark 
   background-color: #645FC6
+
 
 .checkmark:after 
   content: ""
   position: absolute
   display: none
 
+
 .label input:checked ~ .checkmark:after 
   display: block
 
+  
 .label .checkmark:after 
   left: 7px
   top: 4px

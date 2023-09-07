@@ -5,6 +5,7 @@
   left: 20%
   color: $secondText
   font-weight: 500
+
   &::before
     content: ''
     width: 10px
@@ -17,18 +18,29 @@
     transform: translateY(-50%)
     background-color: #fffda0
 
+  &::selection
+    background-color: $darker
+
+
 .statusName.todo
   &::before
     background-color: #45C7E5
+
 .statusName.doing
   &::before
     background-color: #826DF4
+
 .statusName
   &::before.done
     background-color: #68E7B2
+
 
 .empty
   margin-top: 2rem
   padding-left: 2rem
   font-weight: 500
   color: $secondText
+  
+  &::selection
+    background-color: $darker
+    

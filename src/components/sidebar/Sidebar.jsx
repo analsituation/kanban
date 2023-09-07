@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import Modal from '../modal/Modal'
 import Input from '../input/Input'
@@ -16,6 +17,22 @@ const Sidebar = () => {
   const categories = useSelector(selectCategories)
 
   const dispatch = useDispatch()
+
+  const handleClick = () => {
+    if (board.trim().length === 0) {
+      toast('Write the category name')
+      return
+    }
+    if (
+      !categories.every(category => category.categoryName.toLowerCase() !== board.toLowerCase())
+    ) {
+      toast('Such a category already exists')
+      return
+    }
+    dispatch(createCategory(board))
+    setBoard('')
+    setModalShown(false)
+  }
 
   return (
     <aside className={styles.sidebar}>
@@ -53,15 +70,7 @@ const Sidebar = () => {
           placeholder="New board"
           label="Board title"
         />
-        <Button
-          clickHandler={() => {
-            dispatch(createCategory(board))
-            setBoard('')
-            setModalShown(false)
-          }}
-        >
-          Add new board
-        </Button>
+        <Button clickHandler={handleClick}>Add new board</Button>
       </Modal>
     </aside>
   )

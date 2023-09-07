@@ -23,7 +23,7 @@ const TodoBoard = ({ status, todos }) => {
       {todos.length ? (
         todos.map(todo => <TodoCart key={todo.id} todo={todo} />)
       ) : (
-        <div className={styles.empty}>Empty</div>
+        <div className={styles.empty}>Currently empty, add new tasks</div>
       )}
     </div>
   )

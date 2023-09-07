@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
+import { toast } from 'react-toastify'
 
 import Modal from '../modal/Modal'
 import Button from '../button/Button'
 import Checkbox from '../input/checkbox'
 import { selectStatusesOfCategory } from '../../store/selectors'
-import { changeTask } from '../../store/todoSlice'
+import { changeTask, deleteTask } from '../../store/todoSlice'
 import { isEqual } from './../../utils/isEqual'
 
 import styles from './TodoCart.module.sass'
@@ -32,14 +33,18 @@ const TodoCart = ({ todo }) => {
   const handleChangeCheckbox = currentId => {
     const changedTodo = {
       ...changeTaskData,
-      subTasks: changeTaskData.subTasks.map(st => {
-        if (st.id === currentId) {
-          return {
-            ...st,
-            completed: !st.completed
-          }
-        } else return st
-      })
+      subTasks: [
+        ...changeTaskData.subTasks.map(st => {
+          if (st.id === currentId) {
+            console.log('currentId', currentId)
+            console.log('st.id ', st.id)
+            return {
+              ...st,
+              completed: !st.completed
+            }
+          } else return st
+        })
+      ]
     }
     setChangeTaskData(changedTodo)
   }
@@ -52,6 +57,12 @@ const TodoCart = ({ todo }) => {
     setChangeTaskData(changedTodo)
   }
 
+  const handleDeleteTask = id => {
+    dispatch(deleteTask({ category: categoryName, todoId: id }))
+    setModalShown(false)
+    toast('Task deleted successfully')
+  }
+
   const completedSubTasks = todo.subTasks.filter(st => st.completed === true)
 
   return (
@@ -60,7 +71,14 @@ const TodoCart = ({ todo }) => {
         <h2 className={styles.title}>{todo.title}</h2>
         <p className={styles.desc}>{todo.description}</p>
       </div>
-      <Modal title={todo.title} shown={modalShown} setModalShown={setModalShown}>
+      <Modal
+        title={todo.title}
+        todoId={todo.id}
+        shown={modalShown}
+        setModalShown={setModalShown}
+        editable={true}
+        deleteTask={() => handleDeleteTask(todo.id)}
+      >
         <p className={styles.desc}>{todo.description}</p>
         <div className={styles.subtasks_block}>
           {todo.subTasks.length ? (

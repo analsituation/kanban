@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useLocation } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 import Modal from '../modal/Modal'
 import Input from '../input/Input'
@@ -10,7 +10,6 @@ import Button from '../button/Button'
 import { createTask } from '../../store/todoSlice'
 import { selectCategories } from '../../store/selectors'
 
-import 'react-toastify/dist/ReactToastify.css'
 import styles from './Header.module.sass'
 
 const Header = () => {
@@ -44,6 +43,21 @@ const Header = () => {
       ...taskData,
       subTasks: [...taskData.subTasks, { id, title: '', completed: false }]
     })
+  }
+
+  const handleCreateTask = () => {
+    if (taskData.title.trim().length === 0 || taskData.description.trim().length === 0) {
+      toast('Write all the necessary data')
+      return
+    }
+    const notEmptySubTasks = taskData.subTasks.filter(st => st.title.trim().length !== 0)
+    const task = {
+      ...taskData,
+      subTasks: [...notEmptySubTasks]
+    }
+    dispatch(createTask(categoryName, task))
+    setTaskData(emptyData)
+    setModalShown(false)
   }
 
   return (
@@ -107,17 +121,8 @@ const Header = () => {
           More subtask
         </Button>
         <p className={styles.createtask_info}>*Every new tasks adds to "Todo" category</p>
-        <Button
-          clickHandler={() => {
-            dispatch(createTask(categoryName, taskData))
-            setTaskData(emptyData)
-            setModalShown(false)
-          }}
-        >
-          Add new task
-        </Button>
+        <Button clickHandler={handleCreateTask}>Add new task</Button>
       </Modal>
-      <ToastContainer theme="dark" />
     </>
   )
 }

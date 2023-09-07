@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import clsx from 'clsx'
 
 import TodoBoard from '../../components/todoBoard/TodoBoard'
 import NotFound from '../HomePage/NotFound'
@@ -29,14 +31,31 @@ const Category = () => {
     return categoryInfo.todos.filter(todo => todo.status === status)
   }
 
+  const handleClick = () => {
+    if (status.trim().length === 0) {
+      toast('Write the status')
+      return
+    }
+    if (!statuses.every(element => element.toLowerCase() !== status.toLowerCase())) {
+      toast('Such a status already exists')
+      return
+    }
+    dispatch(createNewStatus({ category: categoryName, status: status.toLowerCase() }))
+    setStatus('')
+    setModalShown(false)
+  }
+
   return (
     <div className={styles.categories}>
       {categoryInfo.todos &&
         statuses.map(board => (
           <TodoBoard key={board} status={board} todos={getTodosByStatus(board)} />
         ))}
-      <div onClick={() => setModalShown(true)} className={styles.newColumn}>
-        + New Column
+      <div
+        onClick={() => setModalShown(true)}
+        className={clsx(styles.newColumn, statuses.length > 1 && styles.third_column)}
+      >
+        + Add new status
       </div>
       <Modal title="Create new status" shown={modalShown} setModalShown={setModalShown}>
         <Input
@@ -44,18 +63,10 @@ const Category = () => {
           value={status}
           onChange={setStatus}
           type="text"
-          placeholder="New status"
+          placeholder="e.g. DOING"
           label="Status name"
         />
-        <Button
-          clickHandler={() => {
-            dispatch(createNewStatus({ category: categoryName, status }))
-            setStatus('')
-            setModalShown(false)
-          }}
-        >
-          Add new board
-        </Button>
+        <Button clickHandler={handleClick}>Add new status</Button>
       </Modal>
     </div>
   )

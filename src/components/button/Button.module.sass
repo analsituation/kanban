@@ -11,10 +11,20 @@
   transition: all .15s ease
   border: 1px solid transparent
 
+  &::selection
+    color: $darker
+    background-color: $accent
+
+
   &.light
     display: block
     background-color: $white
     color: $accent
+
+    &::selection
+      color: $darker
+      background-color: $white
+
 
   &.disabled
     opacity: 0.6
