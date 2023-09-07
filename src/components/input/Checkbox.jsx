@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './checkbox.module.sass'
+import styles from './Checkbox.module.sass'
 
 const Checkbox = ({ id, title, status, onChange }) => {
   return (

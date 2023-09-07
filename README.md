@@ -1,8 +1,31 @@
-# React + Vite
+# Kanban
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### This is a small kanban app that you can use to keep your notes about upcoming or current events.
 
-Currently, two official plugins are available:
+## This app builds with Vite and based on:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React
+- RTK
+- React-Router
+- React-select
+- Redux-persist
+- React-toastify
+- SASS
+
+## Installation
+
+If you want to start this app on your local machine you need clone this repository, then install the dependencies and devDependencies:
+
+```sh
+yarn
+or
+npm install
+```
+
+Then run the app:
+
+```sh
+yarn dev
+or
+npm run dev
+```
