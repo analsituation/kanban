@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import Select from 'react-select'
 import { toast } from 'react-toastify'
 
+import Checkbox from '../input/Checkbox'
 import Modal from '../modal/Modal'
 import Button from '../button/Button'
-import Checkbox from '../input/checkbox'
 import { selectStatusesOfCategory } from '../../store/selectors'
 import { changeTask, deleteTask } from '../../store/todoSlice'
 import { isEqual } from './../../utils/isEqual'
@@ -36,8 +36,6 @@ const TodoCart = ({ todo }) => {
       subTasks: [
         ...changeTaskData.subTasks.map(st => {
           if (st.id === currentId) {
-            console.log('currentId', currentId)
-            console.log('st.id ', st.id)
             return {
               ...st,
               completed: !st.completed
