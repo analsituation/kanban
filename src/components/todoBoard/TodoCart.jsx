@@ -30,12 +30,12 @@ const TodoCart = ({ todo }) => {
 
   const currentStatus = options.findIndex(option => option.value === todo.status)
 
-  const handleChangeCheckbox = currentId => {
+  const handleChangeCheckbox = stId => {
     const changedTodo = {
       ...changeTaskData,
       subTasks: [
         ...changeTaskData.subTasks.map(st => {
-          if (st.id === currentId) {
+          if (st.id === stId) {
             return {
               ...st,
               completed: !st.completed

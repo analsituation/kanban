@@ -12,8 +12,8 @@ const initialState = {
           title: 'Проверить instagram',
           description: 'Листать ленту 30мин. Смотреть reels 30мин.',
           subTasks: [
-            { id: 0, title: 'reels', completed: false },
-            { id: 1, title: 'видео из переписок', completed: true }
+            { id: 'csKiwSwnCwHKM7iGlHHcB', title: 'reels', completed: false },
+            { id: 'Vy1Icj3JDMFoioRGAH1tZ', title: 'видео из переписок', completed: true }
           ]
         },
         {
@@ -30,8 +30,8 @@ const initialState = {
           description:
             'Пельмени. Хорошие пельмени это очень вкусно. На самом деле рецепт простой - много мяса, мало теста. Сперва готовим тонкое яичное тесто, с добавлением сливочного масла. Лук сладких сортов для образования бульончика и перец совсем немного... ',
           subTasks: [
-            { id: 0, title: 'много мяса', completed: true },
-            { id: 1, title: 'мало теста', completed: true }
+            { id: 'h4F8mTKygSSGmiLGczVGq', title: 'много мяса', completed: true },
+            { id: 'G7VG3D4kzpBWfuMlgkRTF', title: 'мало теста', completed: true }
           ]
         },
         {
@@ -40,9 +40,21 @@ const initialState = {
           title: 'Смотреть ютуб',
           description: 'Впитать ежедневную порцию контента',
           subTasks: [
-            { id: 0, title: 'https://www.youtube.com/watch?v=g6zwP0VyFAk', completed: false },
-            { id: 1, title: 'https://www.youtube.com/watch?v=DGBYO_KK2lQ', completed: false },
-            { id: 2, title: 'https://www.youtube.com/watch?v=Bi4MO2P3DlI', completed: false }
+            {
+              id: 'uSgjJax3Dpwbani0UFjzS',
+              title: 'https://www.youtube.com/watch?v=g6zwP0VyFAk',
+              completed: false
+            },
+            {
+              id: 'lFsExpZlXoZMbcfXJWx3o',
+              title: 'https://www.youtube.com/watch?v=DGBYO_KK2lQ',
+              completed: false
+            },
+            {
+              id: 'GNmGdOjR2rDupU_-NcUWv',
+              title: 'https://www.youtube.com/watch?v=Bi4MO2P3DlI',
+              completed: false
+            }
           ]
         }
       ]

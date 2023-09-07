@@ -7,7 +7,13 @@ const Checkbox = ({ id, title, status, onChange }) => {
       <label className={styles.label} htmlFor={id}>
         <input type="checkbox" id={id} checked={status} onChange={() => onChange(id)}></input>
         <span className={styles.checkmark}></span>
-        {title}
+        {title.startsWith('http') ? (
+          <a href={title} target="_blank">
+            {title}
+          </a>
+        ) : (
+          title
+        )}
       </label>
     </div>
   )
