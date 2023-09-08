@@ -1,88 +1,7 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
+import { mockTasks } from './mock-data'
 
-const initialState = {
-  categories: [
-    {
-      categoryName: 'Kanban tasks',
-      statuses: ['todo', 'done'],
-      todos: [
-        {
-          status: 'todo',
-          id: 1,
-          title: 'Проверить instagram',
-          description: 'Листать ленту 30мин. Смотреть reels 30мин.',
-          subTasks: [
-            { id: 'csKiwSwnCwHKM7iGlHHcB', title: 'reels', completed: false },
-            { id: 'Vy1Icj3JDMFoioRGAH1tZ', title: 'видео из переписок', completed: true }
-          ]
-        },
-        {
-          status: 'todo',
-          id: 2,
-          title: 'Проверить тикток',
-          description: '1ч смотреть тиктоки. Отправить минимум 20 видео друзьям.',
-          subTasks: []
-        },
-        {
-          status: 'done',
-          id: 3,
-          title: 'Покушать',
-          description:
-            'Пельмени. Хорошие пельмени это очень вкусно. На самом деле рецепт простой - много мяса, мало теста. Сперва готовим тонкое яичное тесто, с добавлением сливочного масла. Лук сладких сортов для образования бульончика и перец совсем немного... ',
-          subTasks: [
-            { id: 'h4F8mTKygSSGmiLGczVGq', title: 'много мяса', completed: true },
-            { id: 'G7VG3D4kzpBWfuMlgkRTF', title: 'мало теста', completed: true }
-          ]
-        },
-        {
-          status: 'done',
-          id: 4,
-          title: 'Смотреть ютуб',
-          description: 'Впитать ежедневную порцию контента',
-          subTasks: [
-            {
-              id: 'uSgjJax3Dpwbani0UFjzS',
-              title: 'https://www.youtube.com/watch?v=g6zwP0VyFAk',
-              completed: false
-            },
-            {
-              id: 'lFsExpZlXoZMbcfXJWx3o',
-              title: 'https://www.youtube.com/watch?v=DGBYO_KK2lQ',
-              completed: false
-            },
-            {
-              id: 'GNmGdOjR2rDupU_-NcUWv',
-              title: 'https://www.youtube.com/watch?v=Bi4MO2P3DlI',
-              completed: false
-            }
-          ]
-        }
-      ]
-    },
-    {
-      categoryName: 'Global tasks',
-      statuses: ['todo', 'doing'],
-      todos: [
-        {
-          status: 'todo',
-          id: 5,
-          title: 'ЬЬДь',
-          description:
-            'Мой дед однажды сказал мне: "Никого не слушай и никому не доверяй"... Потом он еще что-то говорил, но я его уже не слушал.',
-          subTasks: []
-        },
-        {
-          status: 'doing',
-          id: 7,
-          title: 'biba',
-          description:
-            'Лучшая зарядка - это балтика девятка; Охранник рынка - единственный кто следит за базаром; На днях был в качалке, занимался с тренажерами... Тренарежры стали сильнее; Бегать за овцами - это удел баранов. Я бегу только за пивом;  Одна полоска - подлежащее, две - пора идти за хлебом; ',
-          subTasks: [{ id: 0, title: 'UUUUUGGHHHH', completed: true }]
-        }
-      ]
-    }
-  ]
-}
+const initialState = mockTasks
 
 export const todoSlice = createSlice({
   name: 'todos',
@@ -148,7 +67,8 @@ export const todoSlice = createSlice({
       const currentCategory = state.categories.find(
         category => category.categoryName === action.payload.category
       )
-      const currentTodo = currentCategory.todos.findIndex(todo => todo.id === action.payload.itemId)
+      console.log(currentCategory)
+      const currentTodo = currentCategory.todos.findIndex(todo => todo.id === action.payload.todoId)
       currentCategory.todos.splice(currentTodo, 1)
     }
   }
