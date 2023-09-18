@@ -1,6 +1,7 @@
 # Kanban
 
 ### This is a small kanban app that you can use to keep your notes about upcoming or current events.
+[live app hosted on vercel](https://kanban-bibus.vercel.app/)
 
 ## This app builds with Vite and based on:
 
