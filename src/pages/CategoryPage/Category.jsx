@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -17,10 +17,10 @@ import styles from './Category.module.sass'
 const Category = () => {
   const [modalShown, setModalShown] = useState(false)
   const [status, setStatus] = useState('')
-  const { categoryName } = useParams()
+  const { categorySlug } = useParams()
   const dispatch = useDispatch()
 
-  const categoryInfo = useSelector(state => selectCurrentCategory(state, categoryName))
+  const categoryInfo = useSelector(state => selectCurrentCategory(state, categorySlug))
   if (!categoryInfo) {
     return <NotFound />
   }
@@ -40,10 +40,14 @@ const Category = () => {
       toast('Such a status already exists')
       return
     }
-    dispatch(createNewStatus({ category: categoryName, status: status.toLowerCase() }))
+    dispatch(createNewStatus({ category: categorySlug, status: status.toLowerCase() }))
     setStatus('')
     setModalShown(false)
   }
+
+  useEffect(() => {
+    setStatus('')
+  }, [modalShown])
 
   return (
     <div className={styles.categories}>

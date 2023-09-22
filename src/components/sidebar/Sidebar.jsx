@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -34,6 +34,10 @@ const Sidebar = () => {
     setModalShown(false)
   }
 
+  useEffect(() => {
+    setBoard('')
+  }, [modalShown])
+
   return (
     <aside className={styles.sidebar}>
       <Link to={'/'}>
@@ -49,7 +53,7 @@ const Sidebar = () => {
         <div className={styles.categories}>
           {categories.map(category => (
             <NavLink
-              to={`/category/${category.categoryName}`}
+              to={`/category/${category.categorySlug}`}
               className={({ isActive }) => (isActive ? styles.active : '')}
               key={category.categoryName}
             >

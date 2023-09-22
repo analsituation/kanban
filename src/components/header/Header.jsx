@@ -8,15 +8,18 @@ import Input from '../input/Input'
 import Label from '../label/Label'
 import Button from '../button/Button'
 import { createTask } from '../../store/todoSlice'
-import { selectCategories } from '../../store/selectors'
+import { selectCategories, selectCurrentCategory } from '../../store/selectors'
 
 import styles from './Header.module.sass'
 
 const Header = () => {
-  const { categoryName } = useParams()
+  const { categorySlug } = useParams()
   const location = useLocation()
   const categories = useSelector(selectCategories)
-  const existingCategory = !!categories.find(el => el.categoryName === categoryName)
+  const existingCategory = !!categories.find(el => el.categorySlug === categorySlug)
+
+  const categoryInfo = useSelector(state => selectCurrentCategory(state, categorySlug))
+  const categoryName = categoryInfo ? categoryInfo.categoryName : ''
 
   const emptyData = {
     title: '',
@@ -55,7 +58,7 @@ const Header = () => {
       ...taskData,
       subTasks: [...notEmptySubTasks]
     }
-    dispatch(createTask(categoryName, task))
+    dispatch(createTask(categorySlug, task))
     setTaskData(emptyData)
     setModalShown(false)
   }

@@ -2,6 +2,7 @@ export const mockTasks = {
   categories: [
     {
       categoryName: 'Kanban tasks',
+      categorySlug: 'kanban-tasks',
       statuses: ['todo', 'done'],
       todos: [
         {
@@ -75,6 +76,7 @@ export const mockTasks = {
     },
     {
       categoryName: 'Global tasks',
+      categorySlug: 'global-tasks',
       statuses: ['todo', 'doing'],
       todos: [
         {
@@ -84,20 +86,6 @@ export const mockTasks = {
           description:
             'Мой дед однажды сказал мне: "Никого не слушай и никому не доверяй"... Потом он еще что-то говорил, но я его уже не слушал.',
           subTasks: []
-        },
-        {
-          status: 'doing',
-          id: 7,
-          title: 'biba',
-          description:
-            'Лучшая зарядка - это балтика девятка; Охранник рынка - единственный кто следит за базаром; На днях был в качалке, занимался с тренажерами... Тренарежры стали сильнее; Бегать за овцами - это удел баранов. Я бегу только за пивом;  Одна полоска - подлежащее, две - пора идти за хлебом; ',
-          subTasks: [
-            {
-              id: 'jfOXoTjcjUOtB6bvy0LaB',
-              title: 'UUUUUGGHHHH',
-              completed: true
-            }
-          ]
         }
       ]
     }

@@ -16,9 +16,9 @@ import styles from './TodoCart.module.sass'
 const TodoCart = ({ todo }) => {
   const [modalShown, setModalShown] = useState(false)
   const [changeTaskData, setChangeTaskData] = useState(todo)
-  const { categoryName } = useParams()
+  const { categorySlug } = useParams()
 
-  const statuses = useSelector(state => selectStatusesOfCategory(state, categoryName))
+  const statuses = useSelector(state => selectStatusesOfCategory(state, categorySlug))
   const dispatch = useDispatch()
 
   const options = [
@@ -56,7 +56,7 @@ const TodoCart = ({ todo }) => {
   }
 
   const handleDeleteTask = id => {
-    dispatch(deleteTask({ category: categoryName, todoId: id }))
+    dispatch(deleteTask({ category: categorySlug, todoId: id }))
     setModalShown(false)
     toast('Task deleted successfully')
   }
@@ -115,7 +115,7 @@ const TodoCart = ({ todo }) => {
         <Button
           disabled={isEqual(todo, changeTaskData)}
           clickHandler={() => {
-            dispatch(changeTask(categoryName, changeTaskData))
+            dispatch(changeTask(categorySlug, changeTaskData))
             setModalShown(false)
           }}
         >

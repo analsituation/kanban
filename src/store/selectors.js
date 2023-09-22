@@ -4,8 +4,8 @@ export const selectCategories = state => state.todos.categories
 export const selectStatuses = state => state.todos.statuses
 
 export const selectCurrentCategory = createSelector(
-  [selectCategories, (state, category) => category],
-  (categories, categoryName) => categories.filter(cat => cat.categoryName === categoryName)[0]
+  [selectCategories, (state, categorySlug) => categorySlug],
+  (categories, categorySlug) => categories.find(cat => cat.categorySlug === categorySlug)
 )
 
 export const selectStatusesOfCategory = createSelector(
