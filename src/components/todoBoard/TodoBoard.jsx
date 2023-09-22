@@ -5,7 +5,7 @@ import TodoCart from './TodoCart'
 
 import styles from './TodoBoard.module.sass'
 
-const TodoBoard = ({ status, todos }) => {
+const TodoBoard = ({ status, todos, clickHandler }) => {
   const statusName = status.toLowerCase()
 
   return (
@@ -18,7 +18,12 @@ const TodoBoard = ({ status, todos }) => {
           statusName === 'done' && styles.done
         )}
       >
-        {status} ({todos.length})
+        <span className={styles.name_block}>
+          {status} ({todos.length})
+        </span>
+        <span onClick={() => clickHandler(status)} className={styles.delete_button}>
+          &times;
+        </span>
       </h2>
       {todos.length ? (
         todos.map(todo => <TodoCart key={todo.id} todo={todo} />)

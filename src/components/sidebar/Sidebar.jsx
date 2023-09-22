@@ -1,24 +1,30 @@
-import { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import Modal from '../modal/Modal'
 import Input from '../input/Input'
 import Button from '../button/Button'
-import { createCategory } from '../../store/todoSlice'
+import { createCategory, deleteCategory } from '../../store/todoSlice'
 import { selectCategories } from './../../store/selectors'
 
 import styles from './Sidebar.module.sass'
 
 const Sidebar = () => {
-  const [modalShown, setModalShown] = useState(false)
+  const [modalAddShown, setModalAddShown] = useState(false)
+  const [modalDelShown, setModalDelShown] = useState(false)
+  const [categoryModal, setCategoryModal] = useState({})
   const [board, setBoard] = useState('')
+  const [shouldRedirect, setShouldRedirect] = useState(false)
+  const inputFocusRef = useRef(null)
+
   const categories = useSelector(selectCategories)
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const handleClick = () => {
+  const handleAddClick = () => {
     if (board.trim().length === 0) {
       toast('Write the category name')
       return
@@ -31,12 +37,28 @@ const Sidebar = () => {
     }
     dispatch(createCategory(board))
     setBoard('')
-    setModalShown(false)
+    setModalAddShown(false)
+  }
+
+  const handleDelClick = slug => {
+    dispatch(deleteCategory(slug))
+    setShouldRedirect(true)
+    setModalDelShown(false)
   }
 
   useEffect(() => {
+    if (shouldRedirect) {
+      setShouldRedirect(false)
+      navigate('/', { replace: true })
+    }
+  }, [shouldRedirect])
+
+  useEffect(() => {
+    if (!modalDelShown) {
+      inputFocusRef.current.focus()
+    }
     setBoard('')
-  }, [modalShown])
+  }, [modalAddShown])
 
   return (
     <aside className={styles.sidebar}>
@@ -57,16 +79,28 @@ const Sidebar = () => {
               className={({ isActive }) => (isActive ? styles.active : '')}
               key={category.categoryName}
             >
-              <span>{category.categoryName}</span>
+              <div>
+                {category.categoryName}
+                <span
+                  className={styles.delete_button}
+                  onClick={() => {
+                    setModalDelShown(true)
+                    setCategoryModal(category)
+                  }}
+                >
+                  &times;
+                </span>
+              </div>
             </NavLink>
           ))}
         </div>
-        <div onClick={() => setModalShown(true)} className={styles.create_board}>
+        <div onClick={() => setModalAddShown(true)} className={styles.create_board}>
           Create new board
         </div>
       </div>
-      <Modal title="Create new board" shown={modalShown} setModalShown={setModalShown}>
+      <Modal title="Create new board" shown={modalAddShown} setModalShown={setModalAddShown}>
         <Input
+          ref={inputFocusRef}
           name={null}
           value={board}
           onChange={setBoard}
@@ -74,7 +108,14 @@ const Sidebar = () => {
           placeholder="New board"
           label="Board title"
         />
-        <Button clickHandler={handleClick}>Add new board</Button>
+        <Button clickHandler={handleAddClick}>Add new board</Button>
+      </Modal>
+      <Modal
+        title={`Are you sure you want to delete ${categoryModal.categoryName}?`}
+        shown={modalDelShown}
+        setModalShown={setModalDelShown}
+      >
+        <Button clickHandler={() => handleDelClick(categoryModal.categorySlug)}>Yes</Button>
       </Modal>
     </aside>
   )

@@ -85,11 +85,37 @@ export const todoSlice = createSlice({
       )
       const currentTodo = currentCategory.todos.findIndex(todo => todo.id === action.payload.todoId)
       currentCategory.todos.splice(currentTodo, 1)
+    },
+    deleteCategory: (state, action) => {
+      const currentCategory = state.categories.findIndex(
+        category => category.categorySlug === action.payload
+      )
+      state.categories.splice(currentCategory, 1)
+    },
+    deleteStatusCategory: (state, action) => {
+      const currentCategory = state.categories.find(
+        category => category.categorySlug === action.payload.category
+      )
+      const newStatusesArr = currentCategory.statuses.filter(
+        status => status !== action.payload.status
+      )
+      const newTodosArr = currentCategory.todos.filter(
+        todo => todo.status !== action.payload.status
+      )
+      currentCategory.statuses = newStatusesArr
+      currentCategory.todos = newTodosArr
     }
   }
 })
 
-export const { createCategory, createNewStatus, createTask, changeTask, deleteTask } =
-  todoSlice.actions
+export const {
+  createCategory,
+  createNewStatus,
+  createTask,
+  changeTask,
+  deleteTask,
+  deleteCategory,
+  deleteStatusCategory
+} = todoSlice.actions
 
 export default todoSlice.reducer

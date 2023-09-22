@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Input.module.sass'
 
-const Input = ({ type, placeholder, onChange, value, name }) => {
+const Input = React.forwardRef(({ type, placeholder, onChange, value, name }, ref) => {
   const handleFormChange = e => {
     if (name && !name.includes('subtask')) {
       onChange({
@@ -33,6 +33,7 @@ const Input = ({ type, placeholder, onChange, value, name }) => {
 
   return (
     <input
+      ref={ref}
       name={name ? name : null}
       value={valueForInput}
       onChange={e => handleFormChange(e)}
@@ -41,6 +42,6 @@ const Input = ({ type, placeholder, onChange, value, name }) => {
       className={styles.input}
     />
   )
-}
+})
 
 export default Input

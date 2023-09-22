@@ -81,3 +81,32 @@
 a.active span::selection
   color: $darker
   background-color: $accent
+
+
+.delete_button
+  cursor: pointer
+  transition: color 0.1s ease-in
+  position: absolute
+  width: 20px
+  height: 20px
+  top: 50%
+  right: 5%
+  transform: translateY(-50%)
+  font-size: 26px
+  color: $white
+  display: none
+
+  &:hover
+    color: rgba(#f85858, 0.9)
+
+
+.active:hover .delete_button
+  display: flex
+  align-items: center
+  justify-content: center
+
+@media (hover: none) 
+  .active .delete_button
+    display: flex
+    align-items: center
+    justify-content: center

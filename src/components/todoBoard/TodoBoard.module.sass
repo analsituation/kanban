@@ -2,24 +2,27 @@
   text-transform: uppercase
   letter-spacing: 0.1em
   position: relative
-  left: 20%
+  padding-left: 20%
   color: $secondText
   font-weight: 500
 
-  &::before
-    content: ''
-    width: 10px
-    height: 10px
-    border-radius: 100%
-    background-color: #fff
-    position: absolute
-    top: 50%
-    left: -20px
-    transform: translateY(-50%)
-    background-color: #fffda0
+  .name_block
+    position: relative
 
-  &::selection
-    background-color: $darker
+    &::before
+      content: ''
+      width: 10px
+      height: 10px
+      border-radius: 100%
+      background-color: #fff
+      position: absolute
+      top: 50%
+      left: -20px
+      transform: translateY(-50%)
+      background-color: #fffda0
+
+    &::selection
+      background-color: $darker
 
 
 .statusName.todo
@@ -43,4 +46,31 @@
   
   &::selection
     background-color: $darker
+
+.delete_button
+  cursor: pointer
+  position: absolute
+  width: 20px
+  height: 20px
+  top: 50%
+  right: 5%
+  transform: translateY(-50%)
+  font-size: 26px
+  color: $secondText
+  display: none
+  transition: all 0.2s ease-in
+
+
+.statusName:hover .delete_button
+  display: flex
+  align-items: center
+  justify-content: center
     
+.delete_button:hover
+  color: rgba(#f85858, 0.7)
+
+@media (hover: none) 
+  .delete_button
+    display: flex
+    align-items: center
+    justify-content: center

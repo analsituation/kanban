@@ -13,14 +13,6 @@ import { selectCategories, selectCurrentCategory } from '../../store/selectors'
 import styles from './Header.module.sass'
 
 const Header = () => {
-  const { categorySlug } = useParams()
-  const location = useLocation()
-  const categories = useSelector(selectCategories)
-  const existingCategory = !!categories.find(el => el.categorySlug === categorySlug)
-
-  const categoryInfo = useSelector(state => selectCurrentCategory(state, categorySlug))
-  const categoryName = categoryInfo ? categoryInfo.categoryName : ''
-
   const emptyData = {
     title: '',
     description: '',
@@ -33,6 +25,18 @@ const Header = () => {
   const [modalShown, setModalShown] = useState(false)
   const [taskData, setTaskData] = useState(emptyData)
   const dispatch = useDispatch()
+
+  const { categorySlug } = useParams()
+  const location = useLocation()
+  const categories = useSelector(selectCategories)
+
+  let existingCategory
+  if (categories) {
+    existingCategory = !!categories.find(el => el.categorySlug === categorySlug)
+  }
+
+  const categoryInfo = useSelector(state => selectCurrentCategory(state, categorySlug))
+  const categoryName = categoryInfo ? categoryInfo.categoryName : ''
 
   const deleteSubtask = index => {
     setTaskData({
