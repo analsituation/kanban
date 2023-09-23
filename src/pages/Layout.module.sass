@@ -8,3 +8,17 @@
   left: 20%
   right: 0
   padding: 20px 30px
+  transition: all .15s ease
+
+  &.sidebar_hidden
+    left: 0
+
+  @media (max-width: 1200px)
+    left: 25%
+
+  @media (max-width: 1000px)
+    left: 250px
+
+  @media (max-width: 800px)
+    padding: 10px 20px
+    left: 0

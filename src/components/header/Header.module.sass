@@ -7,6 +7,19 @@
   height: 85px
   color: $white
   background-color: $dark
+  transition: all .15s ease
+
+  &.sidebar_hidden
+    left: 0
+
+  @media (max-width: 1200px)
+    left: 25%
+
+  @media (max-width: 1200px)
+    left: 250px
+
+  @media (max-width: 600px)
+    left: 0
   
 
 .subtask_container

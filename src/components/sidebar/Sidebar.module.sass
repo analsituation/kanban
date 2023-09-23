@@ -6,6 +6,33 @@
   width: 20%
   height: 100%
   border-right: 1px solid rgba(#fff , 0.15)
+  transition: transform 0.15s ease
+  min-width: 250px
+  z-index: 3
+
+  &.hidden_sidebar
+    transform: translateX(-100%)
+
+  .hide_button
+    width: 24px
+    height: 24px
+    position: absolute
+    bottom: 20px
+    right: 10px
+    fill: #645FC6
+    transition: all .25s ease
+    cursor: pointer
+
+  .hide_button.hidden_button
+    transform: rotate(180deg)
+    right: -35px
+
+
+  @media (max-width: 1200px)
+    width: 25%
+
+  @media (max-width: 1200px)
+    width: 250px
 
 
 .logo
@@ -59,10 +86,10 @@
       content: ''
       position: absolute
       top: 0
-      left: -20%
+      left: -40%
       bottom: 0
       height: 100%
-      width: 120%
+      width: 140%
       z-index: -1
 
 

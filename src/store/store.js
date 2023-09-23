@@ -11,9 +11,11 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import todosReducer from './todoSlice'
+import sidebarReducer from './sidebarSlice'
 
 const RootReducer = combineReducers({
-  todos: todosReducer
+  todos: todosReducer,
+  sidebar: sidebarReducer
 })
 
 const persistConfig = {

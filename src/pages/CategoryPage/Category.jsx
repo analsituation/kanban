@@ -25,7 +25,7 @@ const Category = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (!modalDelShown) {
+    if (!modalDelShown && inputFocusRef.current) {
       inputFocusRef.current.focus()
     }
     setStatus('')
@@ -62,24 +62,26 @@ const Category = () => {
   }
 
   return (
-    <div className={styles.categories}>
-      {categoryInfo.todos &&
-        statuses.map(board => (
-          <TodoBoard
-            clickHandler={status => {
-              setModalDelShown(true)
-              setStatusModal(status)
-            }}
-            key={board}
-            status={board}
-            todos={getTodosByStatus(board)}
-          />
-        ))}
-      <div
-        onClick={() => setModalAddShown(true)}
-        className={clsx(styles.newColumn, statuses.length > 1 && styles.third_column)}
-      >
-        + Add new status
+    <>
+      <div className={styles.categories}>
+        {categoryInfo.todos &&
+          statuses.map(board => (
+            <TodoBoard
+              clickHandler={status => {
+                setModalDelShown(true)
+                setStatusModal(status)
+              }}
+              key={board}
+              status={board}
+              todos={getTodosByStatus(board)}
+            />
+          ))}
+        <div
+          onClick={() => setModalAddShown(true)}
+          className={clsx(styles.newColumn, statuses.length > 1 && styles.third_column)}
+        >
+          + Add new status
+        </div>
       </div>
       <Modal title="Create new status" shown={modalAddShown} setModalShown={setModalAddShown}>
         <Input
@@ -100,7 +102,7 @@ const Category = () => {
       >
         <Button clickHandler={handleDelSClick}>Yes</Button>
       </Modal>
-    </div>
+    </>
   )
 }
 

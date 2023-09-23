@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -11,6 +11,8 @@ import { createTask } from '../../store/todoSlice'
 import { selectCategories, selectCurrentCategory } from '../../store/selectors'
 
 import styles from './Header.module.sass'
+import { useSidebarStatus } from './../../hooks/sidebarStatus'
+import clsx from 'clsx'
 
 const Header = () => {
   const emptyData = {
@@ -24,6 +26,9 @@ const Header = () => {
 
   const [modalShown, setModalShown] = useState(false)
   const [taskData, setTaskData] = useState(emptyData)
+
+  const [sidebarHide, setSidebarHide] = useSidebarStatus()
+
   const dispatch = useDispatch()
 
   const { categorySlug } = useParams()
@@ -69,7 +74,7 @@ const Header = () => {
 
   return (
     <>
-      <header className={styles.header}>
+      <header className={clsx(styles.header, sidebarHide && styles.sidebar_hidden)}>
         <div className={styles.main_line}>
           <span className={styles.category_route}>
             {existingCategory ? categoryName : 'Platform Launch'}

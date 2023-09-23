@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
+import clsx from 'clsx'
 
 import Modal from '../modal/Modal'
 import Input from '../input/Input'
 import Button from '../button/Button'
 import { createCategory, deleteCategory } from '../../store/todoSlice'
 import { selectCategories } from './../../store/selectors'
+import { useSidebarStatus } from '../../hooks/sidebarStatus'
 
 import styles from './Sidebar.module.sass'
 
@@ -20,6 +22,8 @@ const Sidebar = () => {
   const inputFocusRef = useRef(null)
 
   const categories = useSelector(selectCategories)
+
+  const [sidebarHide, setSidebarHide] = useSidebarStatus()
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -54,14 +58,14 @@ const Sidebar = () => {
   }, [shouldRedirect])
 
   useEffect(() => {
-    if (!modalDelShown) {
+    if (!modalDelShown && inputFocusRef.current) {
       inputFocusRef.current.focus()
     }
     setBoard('')
   }, [modalAddShown])
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={clsx(styles.sidebar, sidebarHide && styles.hidden_sidebar)}>
       <Link to={'/'}>
         <div className={styles.logo}>
           {/* <div className={styles.logo_img}>
@@ -117,6 +121,14 @@ const Sidebar = () => {
       >
         <Button clickHandler={() => handleDelClick(categoryModal.categorySlug)}>Yes</Button>
       </Modal>
+      <div
+        onClick={() => setSidebarHide(prev => !prev)}
+        className={clsx(styles.hide_button, sidebarHide && styles.hidden_button)}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z" />
+        </svg>
+      </div>
     </aside>
   )
 }
