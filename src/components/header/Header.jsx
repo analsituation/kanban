@@ -105,6 +105,7 @@ const Header = () => {
 
         <Label label_title="Task description">
           <Input
+            textarea={true}
             name="description"
             value={taskData}
             onChange={setTaskData}
