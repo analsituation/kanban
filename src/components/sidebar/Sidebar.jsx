@@ -122,7 +122,7 @@ const Sidebar = () => {
         <Button clickHandler={() => handleDelClick(categoryModal.categorySlug)}>Yes</Button>
       </Modal>
       <div
-        onClick={() => setSidebarHide(prev => !prev)}
+        onClick={() => setSidebarHide(!sidebarHide)}
         className={clsx(styles.hide_button, sidebarHide && styles.hidden_button)}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

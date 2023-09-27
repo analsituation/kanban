@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import clsx from 'clsx'
 
 import Modal from '../modal/Modal'
 import Input from '../input/Input'
 import Label from '../label/Label'
 import Button from '../button/Button'
+import { useSidebarStatus } from './../../hooks/sidebarStatus'
 import { createTask } from '../../store/todoSlice'
 import { selectCategories, selectCurrentCategory } from '../../store/selectors'
 
 import styles from './Header.module.sass'
-import { useSidebarStatus } from './../../hooks/sidebarStatus'
-import clsx from 'clsx'
 
 const Header = () => {
   const emptyData = {

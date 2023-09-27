@@ -6,7 +6,7 @@ export const sidebarSlice = createSlice({
   name: 'sidebar',
   initialState,
   reducers: {
-    changeSidebar: state => !state
+    changeSidebar: (state, action) => action.payload
   }
 })
 
